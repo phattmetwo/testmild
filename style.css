@@ -1238,16 +1238,44 @@ tbody tr:hover {
   }
 }
 
+/* ========= Mobile table behavior (override) ========= */
 
-
-/* ===== ยกเลิก Card View บนมือถือเล็ก และใช้ Scroll แทน ===== */
-@media (max-width: 480px) {
-  table, thead, tbody, th, td, tr {
-    display: table;
-  }
+/* 1) ปิดโหมดการ์ดบนมือถือแนวตั้ง: ให้คงรูปแบบ 'table' + เลื่อนแนวนอนได้ */
+@media (max-width: 768px) and (orientation: portrait) {
+  table { display: table; width: 100%; }
   thead { display: table-header-group; }
   tbody { display: table-row-group; }
-  tr { display: table-row; }
-  td, th { display: table-cell; }
+  tr    { display: table-row; }
+  th, td{ display: table-cell; }
   td::before { content: none !important; }
+
+  .table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  table { min-width: 1000px; } /* ปรับเลขได้ตามจำนวนคอลัมน์ */
+}
+
+/* 2) มือถือแนวนอน = ใช้พื้นที่เต็มหน้าจอ เหมือนเดสก์ท็อป */
+@media (max-width: 900px) and (orientation: landscape) {
+  body { padding: 8px; }
+  .container { max-width: 100vw; }
+  .table-wrap { overflow-x: visible; }
+  table { min-width: 100%; }
+}
+
+/* 3) กันกฎเดิมของ "Responsive Table -> Card View" ไม่ให้ทำงาน */
+@media (max-width: 480px) {
+  table, thead, tbody, th, td, tr { 
+    display: revert !important; 
+  }
+  td::before { content: none !important; }
+}
+
+/* sticky header (optional) */
+.table-wrap thead th {
+  position: sticky;
+  top: 0;
+  z-index: 2;
 }
