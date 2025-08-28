@@ -1238,33 +1238,33 @@ tbody tr:hover {
   }
 }
 
-
-
-/* ===== ปรับปรุงการแสดงผลตารางธุรกรรมสำหรับมือถือ ===== */
-.table-wrap {
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
+/* ========= Calendar fix: equal cell size ========= */
+.calendar {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr); /* 7 วัน */
+  border: 1px solid #ddd;
 }
 
-/* มือถือแนวตั้ง (จอแคบ ≤480px) → ตาราง scroll ได้ */
-@media (max-width: 480px) {
-  table {
-    display: table;
-    min-width: 800px;      /* ความกว้างขั้นต่ำ */
-    width: 100%;
-  }
-  thead, tbody, th, td, tr {
-    display: table-cell;
-  }
+.calendar .day {
+  border: 1px solid #eee;
+  min-height: 120px;        /* ความสูงเท่ากัน */
+  padding: 4px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  font-size: 14px;
+  overflow: hidden;         /* กันไม่ให้ข้อความทะลุออก */
 }
 
-/* มือถือแนวนอน/แท็บเล็ต (>480px) → ตารางเต็มหน้าจอ */
-@media (min-width: 481px) {
-  .table-wrap {
-    overflow-x: visible;
-  }
-  table {
-    min-width: 100%;
-    width: 100%;
-  }
+.calendar .day .day-header {
+  font-weight: bold;
+  margin-bottom: 4px;
+  font-size: 13px;
+}
+
+.calendar .day .day-content {
+  flex: 1;
+  overflow-y: auto;         /* ถ้ามีข้อมูลยาว เลื่อนในช่องวันได้ */
+  font-size: 12px;
 }
