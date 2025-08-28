@@ -1238,33 +1238,16 @@ tbody tr:hover {
   }
 }
 
-/* ========= Calendar fix: equal cell size ========= */
-.calendar {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr); /* 7 วัน */
-  border: 1px solid #ddd;
-}
 
-.calendar .day {
-  border: 1px solid #eee;
-  min-height: 120px;        /* ความสูงเท่ากัน */
-  padding: 4px;
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  font-size: 14px;
-  overflow: hidden;         /* กันไม่ให้ข้อความทะลุออก */
-}
 
-.calendar .day .day-header {
-  font-weight: bold;
-  margin-bottom: 4px;
-  font-size: 13px;
-}
-
-.calendar .day .day-content {
-  flex: 1;
-  overflow-y: auto;         /* ถ้ามีข้อมูลยาว เลื่อนในช่องวันได้ */
-  font-size: 12px;
+/* ===== ยกเลิก Card View บนมือถือเล็ก และใช้ Scroll แทน ===== */
+@media (max-width: 480px) {
+  table, thead, tbody, th, td, tr {
+    display: table;
+  }
+  thead { display: table-header-group; }
+  tbody { display: table-row-group; }
+  tr { display: table-row; }
+  td, th { display: table-cell; }
+  td::before { content: none !important; }
 }
